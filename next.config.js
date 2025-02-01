@@ -8,4 +8,7 @@ module.exports = withNextIntl({
   images: {
     domains: ["utfs.io"],
   },
+  // plugins: [
+  //   require("tailwindcss/typography"),
+  // ]
 });
