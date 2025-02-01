@@ -3,18 +3,19 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
 
 interface CourseEnrollButtonProps {
   price: number;
   courseId: string;
+  userId?: string | null;
 }
 
 export const CourseEnrollButton = ({
   price,
   courseId,
+  userId,
 }: CourseEnrollButtonProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -22,9 +23,14 @@ export const CourseEnrollButton = ({
     try {
       setIsLoading(true);
 
-      const response = await axios.post(`/api/courses/${courseId}/checkout`)
+      if (!userId) {
+        throw new Error("Not authenticated");
+      }
 
-      window.location.assign(response.data.url);
+      await axios.post(`/api/webhook`, { userId, courseId });
+
+      toast.success("Successfully enrolled in the course!");
+      // Optionally, you can refresh the page or update the state to reflect the enrollment
     } catch {
       toast.error("Something went wrong");
     } finally {
