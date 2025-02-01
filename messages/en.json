@@ -1,0 +1,46 @@
+{
+  "Navbar": {
+    "tm": "Teacher Mode",
+    "exit": "Exit"
+  },
+  "Sidebar": {
+    "dashboard": "Dashboard",
+    "browse": "Browse",
+    "ai": "Ai-Assistant",
+    "course": "Course",
+    "analytics": "Analytics"
+  },
+  "Course-teacher": {
+    "course_setup" : "Course setup",
+    "fields" : "Complete all fields",
+    "customize_your_course": "Customize your course",
+    "course_title": "Course title",
+    "cancel" : "cancel",
+    "save" : "save",
+    "course_description": "Course description",
+    "course_image": "Course image",
+    "edit_image" : "Edit image",
+    "course_category": "Course category",
+    "course_chapters": "Course chapters",
+    "add_a_chapter": "Add a chapter",
+    "add_image" : "Add an image",
+    "sell_your_course": "Sell your course",
+    "course_price": "Course price",
+    "resources_attachments": "Resources & Attachments",
+    "course_attachments": "Course attachments",
+    "edit_title": "Edit title",
+    "edit_description": "Edit description",
+    "add_an_image": "Add an image",
+    "edit_category": "Edit category",
+    "edit_price": "Edit price",
+    "add_a_file": "Add a file",
+    "no_description": "No description",
+    "no_image": "No image",
+    "select_option" : "Select option...",
+    "no_category": "No category",
+    "no_chapters": "No chapters",
+    "no_price": "No price",
+    "no_attachments_yet": "No attachments yet",
+    "drag_and_drop_to_reorder_the_chapters": "Drag and drop to reorder the chapters"
+  }
+}

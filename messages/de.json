@@ -1,0 +1,13 @@
+{
+  "Navbar": {
+    "tm" : "Lehrermodus",
+    "exit" : "Beenden"
+  },
+  "Sidebar" : {
+    "dashboard" : "Übersicht",
+    "browse" : "Durchsuchen",
+    "ai" : "KI-Assistent",
+    "course" : "Kurs",
+    "analytics" : "Analytik"
+  }
+}

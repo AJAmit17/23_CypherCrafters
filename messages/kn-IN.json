@@ -1,0 +1,42 @@
+{
+  "Navbar": {
+    "tm": "ಶಿಕ್ಷಕರ ಮೋಡ್",
+    "exit": "ನಿರ್ಗಮಿಸಿ"
+  },
+  "Sidebar": {
+    "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "browse": "ಬ್ರೌಸ್",
+    "ai": "ಎಐ-ಅಸಿಸ್ಟೆಂಟ್",
+    "course": "ಕೋರ್ಸ್",
+    "analytics": "ವಿಶ್ಲೇಷಣೆ"
+  },
+  "Course-teacher": {
+    "course_setup": "ಕೋರ್ಸ್ ಸೆಟಪ್",
+    "fields": "ಎಲ್ಲಾ ಕ್ಷೇತ್ರಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ",
+    "customize_your_course": "ನಿಮ್ಮ ಕೋರ್ಸ್ ಅನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ",
+    "course_title": "ಕೋರ್ಸ್ ಶೀರ್ಷಿಕೆ",
+    "cancel": "ರದ್ದು",
+    "course_description": "ಕೋರ್ಸ್ ವಿವರಣೆ",
+    "course_image": "ಕೋರ್ಸ್ ಚಿತ್ರ",
+    "course_category": "ಕೋರ್ಸ್ ವರ್ಗ",
+    "course_chapters": "ಕೋರ್ಸ್ ಅಧ್ಯಾಯಗಳು",
+    "add_a_chapter": "ಅಧ್ಯಾಯವನ್ನು ಸೇರಿಸಿ",
+    "sell_your_course": "ನಿಮ್ಮ ಕೋರ್ಸ್ ಅನ್ನು ಮಾರಾಟ ಮಾಡಿ",
+    "course_price": "ಕೋರ್ಸ್ ಬೆಲೆ",
+    "resources_attachments": "ಸಂಪತ್ತುಗಳು ಮತ್ತು ಅಟ್ಯಾಚ್ಮೆಂಟ್‌ಗಳು",
+    "course_attachments": "ಕೋರ್ಸ್ ಅಟ್ಯಾಚ್ಮೆಂಟ್‌ಗಳು",
+    "edit_title": "ಶೀರ್ಷಿಕೆಯನ್ನು ಸಂಪಾದಿಸಿ",
+    "edit_description": "ವಿವರಣೆಯನ್ನು ಸಂಪಾದಿಸಿ",
+    "add_an_image": "ಚಿತ್ರವನ್ನು ಸೇರಿಸಿ",
+    "edit_category": "ವರ್ಗವನ್ನು ಸಂಪಾದಿಸಿ",
+    "edit_price": "ಬೆಲೆಯನ್ನು ಸಂಪಾದಿಸಿ",
+    "add_a_file": "ಫೈಲ್ ಸೇರಿಸಿ",
+    "no_description": "ವಿವರಣೆ ಇಲ್ಲ",
+    "no_image": "ಚಿತ್ರವಿಲ್ಲ",
+    "no_category": "ವರ್ಗವಿಲ್ಲ",
+    "no_chapters": "ಅಧ್ಯಾಯಗಳಿಲ್ಲ",
+    "no_price": "ಬೆಲೆಯಿಲ್ಲ",
+    "no_attachments_yet": "ಇನ್ನೂ ಅಟ್ಯಾಚ್ಮೆಂಟ್‌ಗಳಿಲ್ಲ",
+    "drag_and_drop_to_reorder_the_chapters": "ಅಧ್ಯಾಯಗಳನ್ನು ಪುನಃ ವಿಂಗಡಿಸಲು ಎಳೆಯಿರಿ ಮತ್ತು ಬಿಟ್ಟುಬಿಡಿ"
+  }
+}

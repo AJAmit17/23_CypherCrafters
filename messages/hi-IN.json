@@ -1,0 +1,43 @@
+{
+    "Navbar": {
+      "tm": "शिक्षक मोड",
+      "exit": "बाहर निकलें"
+    },
+    "Sidebar": {
+      "dashboard": "डैशबोर्ड",
+      "browse": "ब्राउज़",
+      "ai": "एआई सहायक",
+      "course": "कोर्स",
+      "analytics": "विश्लेषण"
+    },
+    "Course-teacher": {
+      "course_setup": "कोर्स सेटअप",
+      "fields": "सभी फ़ील्ड्स को पूरा करें",
+      "customize_your_course": "अपने कोर्स को अनुकूलित करें",
+      "course_title": "कोर्स शीर्षक",
+      "cancel": "रद्द करें",
+      "course_description": "कोर्स विवरण",
+      "course_image": "कोर्स छवि",
+      "course_category": "कोर्स श्रेणी",
+      "course_chapters": "कोर्स अध्याय",
+      "add_a_chapter": "एक अध्याय जोड़ें",
+      "sell_your_course": "अपने कोर्स को बेचें",
+      "course_price": "कोर्स कीमत",
+      "resources_attachments": "संसाधन और संलग्नक",
+      "course_attachments": "कोर्स संलग्नक",
+      "edit_title": "शीर्षक संपादित करें",
+      "edit_description": "विवरण संपादित करें",
+      "add_an_image": "एक छवि जोड़ें",
+      "edit_category": "श्रेणी संपादित करें",
+      "edit_price": "कीमत संपादित करें",
+      "add_a_file": "एक फ़ाइल जोड़ें",
+      "no_description": "कोई विवरण नहीं",
+      "no_image": "कोई छवि नहीं",
+      "no_category": "कोई श्रेणी नहीं",
+      "no_chapters": "कोई अध्याय नहीं",
+      "no_price": "कोई कीमत नहीं",
+      "no_attachments_yet": "अभी तक कोई संलग्नक नहीं",
+      "drag_and_drop_to_reorder_the_chapters": "अध्यायों को पुनः क्रमबद्ध करने के लिए खींचें और छोड़ें"
+    }
+  }
+  
