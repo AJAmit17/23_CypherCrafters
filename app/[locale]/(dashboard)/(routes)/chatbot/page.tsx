@@ -1,28 +1,28 @@
-import ChatTest from '@/components/chatbot'
 import React from 'react'
 import { Metadata } from 'next';
+import Chatbot from '@/components/chatbot';
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: 'Chatbot',
-  description: 'Interact with our chatbot for assistance and information.',
+  title: 'AI Assistant',
+  description: 'Chat with our AI assistant for help and information.',
   openGraph: {
-    title: 'Chatbot',
-    description: 'Interact with our chatbot for assistance and information.',
+    title: 'AI Assistant',
+    description: 'Chat with our AI assistant for help and information.',
   },
   twitter: {
-    title: 'Chatbot',
-    description: 'Interact with our chatbot for assistance and information.',
+    title: 'AI Assistant',
+    description: 'Chat with our AI assistant for help and information.',
   },
-  keywords: 'chatbot, assistance, information, help',
+  keywords: 'ai assistant, chatbot, help, information',
   robots: 'index, follow',
 };
 
 const Chat = () => {
   return (
     <div className="p-6 bg-gray-50 min-h-screen flex items-center justify-center">
-      <ChatTest />
+      <Chatbot />
     </div>
   )
 }
