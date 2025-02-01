@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import * as z from "zod";
@@ -5,7 +6,7 @@ import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Pencil } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Course } from "@prisma/client";
@@ -21,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { useTranslations } from "next-intl";
+import { useGeneratedContent } from "@/context/course-generator-context";
 
 interface DescriptionFormProps {
   initialData: Course;
@@ -64,6 +66,15 @@ export const DescriptionForm = ({
   }
 
   const t = useTranslations("Course-teacher")
+
+  const { generatedContent } = useGeneratedContent();
+  
+  useEffect(() => {
+    if (generatedContent.description && isEditing) {
+      form.setValue('description', generatedContent.description);
+      toast.success("Description updated from AI generation");
+    }
+  }, [generatedContent.description]);
 
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">

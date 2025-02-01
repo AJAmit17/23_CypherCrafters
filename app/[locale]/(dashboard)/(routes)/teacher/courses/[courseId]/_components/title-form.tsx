@@ -4,10 +4,12 @@ import * as z from "zod";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Pencil } from "lucide-react";
+import { Pencil, Wand2 } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useGeneratedContent } from "@/context/course-generator-context";
+import { AIFormModal } from "@/components/ai-form-modal";
 
 import {
   Form,
@@ -50,6 +52,8 @@ export const TitleForm = ({
 
   const { isSubmitting, isValid } = form.formState;
 
+  const { updateGeneratedContent } = useGeneratedContent();
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}`, values);
@@ -60,6 +64,56 @@ export const TitleForm = ({
       toast.error("Something went wrong");
     }
   }
+
+  const generateAIContent = async () => {
+    try {
+      const titleVal = form.getValues('title');
+      if (!titleVal) {
+        return toast.error("Please enter a title first");
+      }
+
+      toast.loading("Generating course content...");
+      const response = await fetch('/api/content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [{ role: 'user', content: titleVal }]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate content');
+      }
+
+      let fullText = '';
+      const reader = response.body?.getReader();
+      if (!reader) throw new Error('No response body');
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        fullText += new TextDecoder().decode(value);
+      }
+
+      try {
+        const parsed = JSON.parse(fullText);
+        form.setValue('title', parsed.refinedTitle);
+        updateGeneratedContent({
+          description: parsed.description,
+          // chapters: parsed.chapters
+        });
+        toast.success("Content generated successfully!");
+      } catch (e) {
+        console.error('Parse error:', e);
+        toast.error("Failed to parse AI response");
+      }
+    } catch (error) {
+      console.error('Generation error:', error);
+      toast.error("Failed to generate content");
+    } finally {
+      toast.dismiss();
+    }
+  };
 
   const t = useTranslations("Course-teacher")
 
@@ -112,10 +166,24 @@ export const TitleForm = ({
               >
                 {t("save")}
               </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                onClick={generateAIContent}
+              >
+                <Wand2 className="h-4 w-4" />
+              </Button>
             </div>
           </form>
         </Form>
       )}
+      <div className="flex items-center gap-x-2 mt-4">
+        <AIFormModal 
+          initialTitle={initialData.title} 
+          courseId={courseId}
+        />
+      </div>
     </div>
   )
 }
