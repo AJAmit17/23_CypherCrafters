@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart, Compass, Layout, List, MessageCircleIcon , BotIcon} from "lucide-react";
+import { BarChart, Compass, Layout, List, MessageCircleIcon, BotIcon, BookIcon, GraduationCapIcon, MapIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { SidebarItem } from "./sidebar-item";
@@ -32,8 +32,13 @@ const SidebarRoutes = () => {
       label: "AI Tutor",
       href: "/ai-tutor",
     },
+    {
+      icon: BookIcon,
+      label: "Quiz App",
+      href: "https://quizze-generator.vercel.app/",
+    }
   ];
-
+  
   const teacherRoutes = [
     {
       icon: List,
