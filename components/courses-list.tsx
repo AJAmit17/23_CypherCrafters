@@ -10,10 +10,11 @@ type CourseWithProgressWithCategory = Course & {
 
 interface CoursesListProps {
   items: CourseWithProgressWithCategory[];
+  className?: string;
 }
 
 export const CoursesList = ({
-  items
+  items, className
 }: CoursesListProps) => {
   return (
     <div>

@@ -1,110 +1,163 @@
 "use client"
 
-import React, { useState } from "react";
-import { useChat } from "@ai-sdk/react";
+import React from "react";
+import { useChat } from "ai/react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import Markdown from "react-markdown";
-import { useUser } from "@clerk/nextjs"; // Import your ShadowCard component
+import { useUser } from "@clerk/nextjs";
 import { Card } from "./ui/card";
 
 const predefinedPrompts = [
-  "online vs offline Courses",
-  "suggest me some courses",
-  "trending courses",
-  "roadmap for {desired_post} role",
+  "list all courses",
+  "show top 5 courses",
+  "show recent courses",
+  "suggest courses for beginners",
 ];
 
-const ChatTest = () => {
-  const { user } = useUser(); // Fetch user data from Clerk
-  const { messages, input, setInput, handleInputChange, handleSubmit } =
-    useChat();
+const CourseCard = ({ course }: { course: any }) => {
+  return (
+    <Card className="p-4 mb-4 bg-white shadow-sm hover:shadow-md transition-shadow">
+      <h3 className="text-lg font-semibold text-blue-700">{course.title}</h3>
+      <p className="text-gray-600 mt-2">{course.description}</p>
+      <div className="grid grid-cols-2 gap-2 mt-3 text-sm">
+        <div className="flex items-center gap-2">
+          <span className="text-gray-500">💰</span>
+          <span className="font-medium">${course.price?.toFixed(2) || 'Free'}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-gray-500">🏷️</span>
+          <span className="font-medium">{course.category}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-gray-500">📝</span>
+          <span className="font-medium">{course.chaptersLength} Chapters</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-gray-500">👥</span>
+          <span className="font-medium">{course.studentsEnrolled} Students</span>
+        </div>
+      </div>
+    </Card>
+  );
+};
 
-  const handlePromptClick = (prompt : string) => {
-    setInput(prompt); // Set the prompt text in the input field
+const formatMessage = (message: any) => {
+  if (message.role === 'assistant' && message.courses) {
+    return (
+      <div className="text-sm">
+        <p className="font-medium mb-4">{message.content}</p>
+        {message.courses.map((course: any, index: number) => (
+          <div key={index} className="mb-4 p-3 border rounded-lg">
+            <h4 className="font-bold">{course.title}</h4>
+            <p className="text-gray-600 my-1">{course.description}</p>
+            <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
+              <p>💰 Price: ${course.price}</p>
+              <p>🏷️ Category: {course.category}</p>
+              <p>📚 Chapters: {course.chaptersLength}</p>
+              <p>👥 Students: {course.studentsEnrolled}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  
+  return <p>{message.content}</p>;
+};
+
+const CourseChatbot = () => {
+  const { user } = useUser();
+  const { messages, input, setInput, handleSubmit } = useChat({
+    api: '/api/chat',
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  const handlePromptClick = (prompt: string) => {
+    setInput(prompt);
   };
 
   return (
-    <>
-      <div className="min-h-[90vh] w-full flex flex-col items-center justify-center p-4">
-        <h1 className="text-center text-3xl font-bold mb-6">
-          Ai-Assistant Chatbot
-        </h1>
-        {/* Prompts display area */}
-        <div className=" mb-3 flex flex-wrap">
-          {predefinedPrompts.map((prompt, index) => (
-            <Card
-              key={index}
-              onClick={() => handlePromptClick(prompt)}
-              className="shadow-md rounded-lg p-4 m-2 cursor-pointer"
-            >
-              <p>{prompt}</p>
-            </Card>
+    <div className="min-h-[90vh] w-full flex flex-col items-center justify-center p-4 bg-gray-50">
+      <h1 className="text-center text-3xl font-bold mb-6 text-blue-800">
+        Course Assistant
+      </h1>
+      
+      <div className="mb-6 flex flex-wrap justify-center gap-2">
+        {predefinedPrompts.map((prompt, index) => (
+          <Button
+            key={index}
+            variant="outline"
+            onClick={() => handlePromptClick(prompt)}
+            className="bg-white hover:bg-blue-50"
+          >
+            {prompt}
+          </Button>
+        ))}
+      </div>
+
+      <div className="mx-auto w-full max-w-4xl bg-white rounded-lg shadow-lg">
+        <ScrollArea className="mb-4 h-[600px] rounded-t-lg p-4">
+          {messages.length === 0 && (
+            <div className="text-center text-gray-500 mt-8">
+              👋 Hi! Ask me about our courses or click one of the suggestions above.
+            </div>
+          )}
+          
+          {messages.map((message) => (
+            <div key={message.id} className="mb-6">
+              {message.role === "user" && (
+                <div className="flex gap-3">
+                  <Avatar>
+                    <AvatarImage src={user?.imageUrl || ""} />
+                    <AvatarFallback className="text-sm">You</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-700">{user?.fullName || 'User'}</p>
+                    <p className="text-gray-600 mt-1">{message.content}</p>
+                  </div>
+                </div>
+              )}
+
+              {message.role === "assistant" && (
+                <div className="flex gap-3 mt-4">
+                  <Avatar>
+                    <AvatarFallback className="bg-blue-600 text-white">
+                      AI
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-700">Course Assistant</p>
+                    <div className="mt-2">
+                      {formatMessage(message)}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
-        </div>
-
-        <div className="mx-auto w-full">
-          <ScrollArea className="mb-4 h-[600px] rounded-md border p-4">
-            {messages.map((m) => (
-              <div key={m.id} className="mr-6 whitespace-pre-wrap md:mr-12">
-                {m.role === "user" && (
-                  <div className="mb-6 flex gap-3">
-                    <Avatar>
-                      <AvatarImage src={user?.imageUrl || ""} />
-                      <AvatarFallback className="text-sm">You</AvatarFallback>
-                    </Avatar>
-                    <div className="mt-1.5">
-                      <p className="text-zinc-500 font-semibold">
-                        {user?.fullName}
-                      </p>
-                      <div className="mt-1.5 text-sm">
-                        <Markdown>{m.content}</Markdown>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {m.role === "assistant" && (
-                  <div className="mb-6 flex gap-3">
-                    <Avatar>
-                      <AvatarImage src="" />
-                      <AvatarFallback className="bg-emerald-500 text-white">
-                        AI
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="mt-1.5 w-full">
-                      <div className="flex justify-between">
-                        <p className="text-zinc-500 font-semibold">Bot</p>
-                      </div>
-                      <div className="mt-2 text-sm">
-                        <Markdown>{m.content}</Markdown>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </ScrollArea>
-          <form onSubmit={handleSubmit} className="flex space-x-4">
+        </ScrollArea>
+        
+        <div className="p-4 border-t">
+          <form onSubmit={handleSubmit} className="flex gap-4">
             <Input
               value={input}
-              placeholder="Say something..."
+              placeholder="Ask about courses or get recommendations..."
               onChange={handleInputChange}
               className="flex-1"
             />
-            <Button
-              type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white"
-            >
+            <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">
               Send
             </Button>
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default ChatTest;
+export default CourseChatbot;

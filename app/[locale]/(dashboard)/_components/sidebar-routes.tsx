@@ -29,8 +29,8 @@ const SidebarRoutes = () => {
     },
     {
       icon: BotIcon,
-      label: t("ai"),
-      href: "/chatbot",
+      label: "AI Tutor",
+      href: "/ai-tutor",
     },
   ];
 
