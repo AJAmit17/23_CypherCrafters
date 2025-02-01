@@ -1,6 +1,7 @@
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from "next/navigation";
 import { CheckCircle, Clock } from "lucide-react";
+import { Metadata } from 'next';
 
 import { getDashboardCourses } from "@/actions/get-dashboard-courses";
 import { CoursesList } from "@/components/courses-list";
@@ -8,6 +9,21 @@ import { CoursesList } from "@/components/courses-list";
 import { InfoCard } from "./_components/info-card";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+  description: 'View your in-progress and completed courses on your dashboard.',
+  openGraph: {
+    title: 'Dashboard',
+    description: 'View your in-progress and completed courses on your dashboard.',
+  },
+  twitter: {
+    title: 'Dashboard',
+    description: 'View your in-progress and completed courses on your dashboard.',
+  },
+  keywords: 'dashboard, courses, learning, education, online courses',
+  robots: 'index, follow',
+};
 
 export default async function Dashboard() {
   const { userId } = auth();

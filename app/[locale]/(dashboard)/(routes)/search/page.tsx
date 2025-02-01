@@ -1,5 +1,6 @@
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from "next/navigation";
+import { Metadata } from 'next';
 
 import { db } from "@/lib/db";
 import { SearchInput } from "@/components/search-input";
@@ -9,6 +10,23 @@ import { CoursesList } from "@/components/courses-list";
 import { Categories } from "./_components/categories";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ searchParams }: { searchParams: { title: string; categoryId: string } }): Promise<Metadata> {
+  return {
+    title: searchParams.title ? `Search: ${searchParams.title}` : 'Course Search',
+    description: 'Search and filter through our extensive collection of courses',
+    openGraph: {
+      title: searchParams.title ? `Search: ${searchParams.title}` : 'Course Search',
+      description: 'Search and filter through our extensive collection of courses',
+    },
+    twitter: {
+      title: searchParams.title ? `Search: ${searchParams.title}` : 'Course Search',
+      description: 'Search and filter through our extensive collection of courses',
+    },
+    keywords: 'search, courses, learning, education, online courses',
+    robots: 'index, follow',
+  };
+}
 
 interface SearchPageProps {
   searchParams: {

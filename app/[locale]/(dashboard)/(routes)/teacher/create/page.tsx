@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { Metadata } from 'next';
 
 import {
   Form,
@@ -27,6 +28,21 @@ const formSchema = z.object({
 });
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: 'Create Course',
+  description: 'Create a new course by providing a title and description.',
+  openGraph: {
+    title: 'Create Course',
+    description: 'Create a new course by providing a title and description.',
+  },
+  twitter: {
+    title: 'Create Course',
+    description: 'Create a new course by providing a title and description.',
+  },
+  keywords: 'create course, new course, teaching, education, online courses',
+  robots: 'index, follow',
+};
 
 const CreatePage = () => {
   const router = useRouter();

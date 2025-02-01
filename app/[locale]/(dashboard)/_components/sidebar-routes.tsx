@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart, Compass, Layout, List, Bot } from "lucide-react";
+import { BarChart, Compass, Layout, List, MessageCircleIcon , BotIcon} from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { SidebarItem } from "./sidebar-item";
@@ -23,7 +23,12 @@ const SidebarRoutes = () => {
       href: "/search",
     },
     {
-      icon: Bot,
+      icon: MessageCircleIcon,
+      label: t("ai"),
+      href: "/chatbot",
+    },
+    {
+      icon: BotIcon,
       label: t("ai"),
       href: "/chatbot",
     },
