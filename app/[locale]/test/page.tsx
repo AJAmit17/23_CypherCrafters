@@ -8,8 +8,7 @@ const Page = () => {
         <CardContent className="p-0 h-full relative">
           <div className="w-full h-full overflow-hidden">
             <iframe
-              src="https://agent.theten.ai/"
-              // src = "http://localhost:8080"
+              src = "http://localhost:3000"
               className="w-full h-[calc(100%+64px)] border-none -mt-16"
               title="The Ten AI Agent"
               loading="lazy"
