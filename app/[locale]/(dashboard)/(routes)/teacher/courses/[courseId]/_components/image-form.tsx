@@ -12,6 +12,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components/file-upload";
 import { useTranslations } from "next-intl";
+import { AIImageDialog } from "./ai-image-dialog";
 
 interface ImageFormProps {
   initialData: Course;
@@ -49,7 +50,7 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
       <div className="font-medium flex items-center justify-between">
         {t("course_image")}
         <Button onClick={toggleEdit} variant="ghost">
-          {isEditing && <>{t("cancel")}</>}
+          {isEditing && <>{t("cancel")}</> }
           {!isEditing && !initialData.imageUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
@@ -81,14 +82,21 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
         ))}
       {isEditing && (
         <div>
-          <FileUpload
-            endpoint="courseImage"
-            onChange={(url) => {
-              if (url) {
+          <div className="flex gap-4 mb-4">
+            <FileUpload
+              endpoint="courseImage"
+              onChange={(url) => {
+                if (url) {
+                  onSubmit({ imageUrl: url });
+                }
+              }}
+            />
+            <AIImageDialog
+              onImageSelect={(url) => {
                 onSubmit({ imageUrl: url });
-              }
-            }}
-          />
+              }}
+            />
+          </div>
           <div className="text-xs text-muted-foreground mt-4">
             16:9 aspect ratio recommended
           </div>
