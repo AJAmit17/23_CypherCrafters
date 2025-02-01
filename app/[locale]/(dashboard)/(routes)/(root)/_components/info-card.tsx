@@ -7,6 +7,7 @@ interface InfoCardProps {
   variant?: "default" | "success";
   label: string;
   icon: LucideIcon;
+  className?: string; // Add this line
 }
 
 export const InfoCard = ({
@@ -14,9 +15,10 @@ export const InfoCard = ({
   icon: Icon,
   numberOfItems,
   label,
+  className = '', // Add this line
 }: InfoCardProps) => {
   return (
-    <div className="border rounded-md flex items-center gap-x-2 p-3">
+    <div className={`border rounded-md flex items-center gap-x-2 p-3 ${className}`}> {/* Apply className here */}
       <IconBadge
         variant={variant}
         icon={Icon}
