@@ -22,11 +22,11 @@ const SidebarRoutes = () => {
       label: t("browse"),
       href: "/search",
     },
-    {
-      icon: MessageCircleIcon,
-      label: t("ai"),
-      href: "/chatbot",
-    },
+    // {
+    //   icon: MessageCircleIcon,
+    //   label: t("ai"),
+    //   href: "/chatbot",
+    // },
     {
       icon: BotIcon,
       label: "AI Tutor",
